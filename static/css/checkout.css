@@ -1,0 +1,326 @@
+html {
+  font-size: 100%;
+}
+
+body {
+  height: 100%;
+  min-height: 100%;
+  cursor: default;
+  color: #000;
+  background-color: #fff;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: unset;
+}
+
+a:hover {
+  color: unset;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+section,
+footer {
+  padding: 0px 3.7rem;
+}
+
+.section {
+  margin: 7.5rem 0;
+}
+
+.container {
+  display: flex;
+  /* flex-wrap: wrap; */
+  /* margin: 7rem 200px; */
+  margin: 10rem 3rem;
+}
+
+.cart {
+  width: 75%;
+  background-color: #f2f2f2;
+}
+
+.summary {
+  background-color: #f2f2f2;
+  width: 45%;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.table {
+  width: 100%;
+  padding: 1rem;
+  text-align: center;
+}
+
+th {
+  font-size: 1.4rem;
+}
+
+.table-head {
+  color: white;
+  background: linear-gradient(0deg, #ffa253 0%, #fd7400 100%);
+  box-shadow: 0px 3px 14px 1px rgba(0, 0, 0, 0.16);
+  height: 1.9rem;
+}
+
+.imgTD {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img-box {
+  margin: 0.6rem;
+  width: 4.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img {
+  max-width: 4.7rem;
+  max-height: 4.7rem;
+}
+
+.nameTD {
+  width: 22.5rem;
+}
+
+.nameTD h2 {
+  font-size: 1rem;
+}
+
+.priceTD {
+  width: 22.5rem;
+}
+
+.priceTD h2 {
+  font-size: 1rem;
+}
+
+.qntTD {
+  width: 22.5rem;
+}
+
+.qntTD h2 {
+  font-size: 1.3rem;
+}
+
+.Quantity {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.icons {
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.deleteTD {
+  width: 4.4rem;
+}
+
+.deleteTD i {
+  cursor: pointer;
+}
+
+.details {
+  margin: 1rem 0;
+  padding: 0 1rem;
+  align-items: center;
+  background: linear-gradient(0deg, #ffa253 0%, #fd7400 100%);
+  box-shadow: 0px 3px 14px 1px rgba(0, 0, 0, 0.16);
+  color: white;
+  height: 1.9rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.shopping_inp_detail {
+  margin-top: 1.9rem;
+  padding: 0 1.9rem;
+}
+
+.shopping_inp {
+  border: 1px solid black;
+  outline: none;
+  background-color: #f2f2f2;
+  width: 100%;
+  height: 2.5rem;
+  margin: 1rem 0;
+  padding: 0.4rem;
+  font-size: 1.3rem;
+}
+
+::placeholder {
+  font-size: 1.3rem;
+}
+
+.hline {
+  width: 100%;
+  height: 1px;
+  background: rgba(19, 19, 19, 0.913);
+}
+
+.checkoutdiv {
+  padding: 0 0.625rem;
+  margin-bottom: 1.3rem;
+}
+
+.checkout {
+  border: none;
+  padding: 0.5rem 1.9rem;
+  color: white;
+  border-radius: 0.19rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  width: 100%;
+  background: linear-gradient(200deg, #ff6b00 0%, #ffb47e 100%);
+  box-shadow: 0px 1px 24px 1px rgba(253, 116, 0, 0.5);
+  transition: all 0.5s ease;
+}
+
+.checkout:hover {
+  transform: translateY(-2px);
+  transition: all 0.5s ease;
+}
+
+@media screen and (max-width: 400px) {
+  html {
+    font-size: 35%;
+  }
+}
+/* For Phone-screen */
+@media screen and (max-width: 904px) {
+  html {
+    font-size: 40%;
+  }
+
+  .container {
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .cart {
+    width: 100%;
+    height: 40vh;
+  }
+
+  .summary {
+    width: 100%;
+    height: 30vh;
+    margin-left: 0;
+  }
+
+  .top h2 {
+    font-size: 2.4rem;
+  }
+
+  th {
+    font-size: 2rem;
+  }
+  .table-head {
+    height: 3rem;
+  }
+
+  .nameTD h2 {
+    font-size: 1.6rem;
+  }
+  .priceTD h2 {
+    font-size: 1.6rem;
+  }
+
+  .qntTD h2 {
+    font-size: 1.6rem;
+  }
+
+  .icons {
+    font-size: 1.6rem;
+  }
+
+  .deleteTD {
+    width: 4.4rem;
+  }
+
+  .shopping_inp_detail h2 {
+    font-size: 2rem;
+  }
+  .shopping_inp {
+    font-size: 1.6rem;
+    height: 3.4rem;
+  }
+  .details {
+    height: 3rem;
+  }
+
+  .details h2 {
+    font-size: 2rem;
+  }
+
+  ::placeholder {
+    font-size: 1.6rem;
+  }
+  .checkoutdiv {
+    padding: 0 0.625rem;
+    margin-bottom: 1.3rem;
+    margin-top: 1rem;
+  }
+
+  .checkout {
+    padding: 0.5rem 1.9rem;
+    font-size: 2rem;
+  }
+
+  .img-box {
+    margin: 2rem 0;
+    width: 6rem;
+  }
+
+  .img {
+    max-width: 6rem;
+    max-height: 6rem;
+  }
+}
+
+@media only screen and (min-width: 904px) and (max-width: 1040px) {
+  html {
+    font-size: 70%;
+  }
+}
+@media only screen and (min-width: 1040px) and (max-width: 1182px) {
+  html {
+    font-size: 75%;
+  }
+}
+@media only screen and (min-width: 1182px) and (max-width: 1400px) {
+  html {
+    font-size: 85%;
+  }
+}

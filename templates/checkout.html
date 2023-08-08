@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout Page</title>
+  
+    <link rel="stylesheet" href="{% static 'css/checkout.css' %}" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  </head>
+  <body>
+    <section class="checkout_section">
+      <div class="container">
+        <div class="cart">
+          <div class="top">
+            <h2>Product Total</h2>
+            <h2 id="items"><span id='total'></span></h2>
+          </div>
+          <table cellpadding="0" class="table" id ="myitems">
+            <tr class="table-head">
+              <th>Images</th>
+              <th>Name</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Delete</th>
+            </tr>
+            
+          </table>
+        </div>
+        <div class="summary">
+          <div>
+            <div class="top">
+              <h2>Order Summary</h2>
+            </div>
+            <div class="details">
+              <h2 id="itemB">Item</h2>
+              <h2 id="totalA">3</h2>
+            </div>
+          </div>
+          <div>
+            <div class="shopping_inp_detail">
+              <h2>Shopping Type</h2>
+              <select name="shopping_inp" class="shopping_inp">
+                <option value="Simple Delivery">Simple Delivery</option>
+                <option value="fast-delivery">Fast Delivery</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <div class="hline"></div>
+            <div class="top">
+              <h2>Total</h2>
+              <h2>$360</h2>
+            </div>
+            <div class="checkoutdiv">
+              <div class="contact_detail" style="margin-bottom: 50px;">
+                <form action="/order/" method="post"> {%csrf_token%}
+                  <input type="hidden" name="item_json" id="item_json">
+                  name:<input type="name" id="name" name="name">
+                  phone:<input type="number" id="phone" name="phone">
+                  email:<input type="email" id="email" name="email">
+                  add:<input type="address" id="address" name="address">
+                
+          
+              </div>
+              <button class="checkout" type="submit" id="myBtn">Check Out</button>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  
+<script>
+
+// CART LOGIC
+if(localStorage.getItem('cart')== null){
+  var cart = {};
+
+}else{
+  cart = JSON.parse(localStorage.getItem('cart'));
+        var sum=0;
+        for (var item in cart){
+          sum = sum + cart[item][0];
+       
+        }
+         document.getElementById('total').innerHTML=sum;
+}
+console.log(cart)
+// CART SHOW LOGiC
+let id = Object.keys(cart)
+console.log(id)
+var i=0;
+
+if ($.isEmptyObject(cart)){
+  mystr = `{% for i in product %}
+  <tr id="{{i.product_id}}">
+    <td class="imgTD">
+      <div class="img-box">
+       <img src="{% static 'img/pro-1.png' %}" class="img">
+      </div>
+    </td>
+    <td class="nameTD"><h2>{{i.product_name}}</h2></td>
+  
+    <td class="qntTD">
+      <div class="Quantity">
+    
+        <input type='number'>
+        
+      </div>
+    </td>
+  
+    <td class="priceTD"><h2>{{i.product_price}}/card</h2></td>
+    <td class="deleteTD">
+      <button class="ri-delete-bin-6-line icons" id="{{i.product_id}}">
+     </button
+    </td></tr>
+    {% endfor %}`
+  $('.table').append(mystr);
+}
+
+else{
+for(item in cart){
+ // console.log(item)
+  let qty = cart[item][0];
+  let name = cart[item][1]; 
+  let img = cart[item][2];
+  let price = cart[item][3];
+  
+  let key = id[i];
+  console.log(key)
+  i=i+1;
+  
+
+ 
+
+  mystr = `<tr id="${key}">
+  <td class="imgTD">
+    <div class="img-box">
+      ${img}
+    </div>
+  </td>
+  <td class="nameTD"><h2>${name}</h2></td>
+
+  <td class="qntTD">
+    <div class="Quantity">
+  
+      <h2>${qty}</h2>
+      
+    </div>
+  </td>
+
+  <td class="priceTD"><h2>${price}/card</h2></td>
+  <td class="deleteTD">
+    <button class="ri-delete-bin-6-line icons" id="${key}">
+   </button
+  </td></tr>`
+  
+$('.table').append(mystr);
+
+
+}
+  
+}
+// ADDING CART TO DATABASE
+$('#item_json').val(JSON.stringify(cart));
+{% if thank%}
+localStorage.clear()
+document.location = "/checkout/"
+{%endif %}
+
+// DELETING ITEM FROM CART
+
+$('.icons').click(function(){
+  var idstr = this.id.toString();
+  console.log(idstr)
+  if(cart[idstr] !=undefined)
+  {
+    delete cart[idstr];
+
+
+  }
+  console.log(cart);
+  var cart_item = document.getElementById(idstr)
+  cart_item.style.display="none"
+  var sum=0;
+        for (var item in cart){
+          sum = sum + cart[item][0];
+       
+        }
+         document.getElementById('total').innerHTML=sum;
+  
+  localStorage.setItem('cart', JSON.stringify(cart));
+});
+
+</script>
+  </body>
+</html>
