@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const cursor = document.getElementById("CustomCursor");
 
-  const movecursor = (e, btn, logo, nav, card, product) => {
+  const movecursor = (e, btn, logo, nav, card, product, qr) => {
     const x = e.clientX - cursor.offsetWidth / 2,
       y = e.clientY - cursor.offsetHeight / 2;
 
@@ -11,7 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
           scale(${logo ? 4 : 1})
           scale(${nav ? 2 : 1})
           scale(${card ? 5 : 1})
-          scale(${product ? 4 : 1})`,
+          scale(${product ? 4 : 1})
+          scale(${qr ? 6 : 1})`,
     };
 
     cursor.animate(keyframes, {
@@ -35,7 +36,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const testicard = e.target.closest(".testimonial_card"),
       card = testicard != null;
+ 
+      const contactqr = e.target.closest(".qr_section"),
+      qr = contactqr != null;
+    
 
-    movecursor(e, btn, logo, nav, card, product);
+    movecursor(e, btn, logo, nav, card, product, qr);
   };
 });

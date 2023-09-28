@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- cursor.js script will only trigger when it is on a pc -->
+    {% comment %} <script src="{% static 'js/cursor.js' %}"></script>    {% endcomment %}
+    {% comment %} <script src="{% static 'js/animate.js' %}"></script> {% endcomment %}
+    <script src="{% static 'js/toggle.js' %}"></script>
+  </head>
+  <body onload='website_switch()'>
+
+    <!-- <div id="CustomCursor"></div> -->
+
+    <!-- NavBar section -->
+    <nav class="nav_conatiner">
+      <div class="website_nav">
+        <div class="logo_sec">
+          <span><img src="{% static 'img/Logo.png' %}" alt="logo" class="logo_img" /></span>
+          <p class="logo_name">
+            Better <br />
+            Equipments.
+          </p>
+        </div>
+        <div class="switches-container">
+          <input
+            type="radio"
+            id="switchWebsite"
+            name="switch"
+            value="website"
+            checked="checked"
+            onclick="website_switch()"
+          />
+          <input
+            type="radio"
+            id="switchProduct"
+            name="switch"
+            value="product"
+            onclick="product_switch()"
+            class="switchProduct"
+          />
+          <label for="switchWebsite">Website</label>
+          <label for="switchProduct">Products</label>
+          <div class="switch-wrapper">
+            <div class="switch">
+              <div>Website</div>
+              <div>Products</div>
+            </div>
+          </div>
+        </div>
+        <div class="nav_items">
+          <ul class="nav_items_ul" id="nav_items_ul">
+            <a href='/'><li class="nav_item active">Home</li></a>
+            <a href='/contact/'><li class="nav_item">Contact</li><a>
+              
+            <li class="nav_item">
+              <a href='/checkout/'>
+                
+              <button type="button" class="qute_btn btn" id="get_quote_btn">
+                Get a quote <div  class= "qute_btn" id='count'> </div>
+              </button></a>
+              <a href='/checkout/'>
+              <button type="button" class="qute_btn btn" id="cart_btn">
+                <i class="ri-shopping-cart-line cart_icon"></i> Cart (<span id='cart_main'>0</span>)
+              </button>
+            </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="mobile_nav">
+        <div class="nav_icons">
+          <a href="#"
+            ><i class="ri-home-fill icon" onclick="website_switch()"></i
+          ></a>
+           <a href='/contact/'><i class="ri-phone-fill icon"></i></a>
+           <a href="#"><img src="{% static '/img/mobile-logo.png' %}" alt="sfs" class="mobile_logo_img" /></a>
+          <a href='#product-section'><i class="ri-shopping-cart-fill icon"></i></a>
+          <a href="#"><i class="ri-menu-3-line icon"></i></a>
+        </div>
+      </div>
+    </nav>
+    <!-- NavBar section End -->
+
+{% block main %}{% endblock main %}
+
+    
+</body>

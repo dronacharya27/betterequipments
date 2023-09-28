@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout</title>
+    <link rel="stylesheet" href="{% static 'css/checkout2.css' %}" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  </head>
+  <body>
+    <section class="checkout_section">
+      <div class="checkout_left">
+        <a href='/'><div class="checkout_left_nav">
+            <span><img src="{% static 'img/Logo.png' %}" alt="logo" class="checkout_logo_img" /></span>
+          <p class="logo_name">
+            Better <br />
+            Equipments.
+          </p>
+        </div></a>
+        <div class="checkout_left_top">
+            <span>
+                <h2>Confirm your order</h2>
+                <h4 id='total'>Items </h4>
+            </span>
+            
+        </div>
+        <div class="checkout_product_list">
+            
+
+
+        </div>
+      </div>
+      <div class="checkout_right">
+        <div class="checkout_right_nav">
+            <a href='/'><span class="nav_icon_circle"><i class="ri-close-circle-fill checkout_right_icon"></i></span></a>
+        </div>
+        <div class="checkout_form">
+            <form action="/order/" method="post"> {%csrf_token%}
+            <input type="hidden" name="item_json" id="item_json">
+            <h3 class="form_title">Your Information</h3>
+            <div class="form_inps">
+                <div class="form_inp">
+                    <label for="name" class="form_label">Full name</label>
+                    <input type="text" id="name" class="single_inp" name="name">
+                </div>
+                <div class="form_inp">
+                    <label for="phone" class="form_label">Phone</label>
+                    <input type="text" id="phone" class="single_inp" name="phone">
+                </div>
+                <div class="form_inp">
+                    <label for="email" class="form_label">Email Id</label>
+                    <input type="text" id="email" class="single_inp" name="email">
+                </div>
+                <div class="form_inp">
+                    <label for="address" class="form_label">Address</label>
+                    <textarea name="address" id="address"  rows="2" class="single_textarea_inp"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="checkout_right_btn_div">
+            <button type="submit" class="checkout_right_btn">PLACE YOUR ORDER</button>
+        </div>
+      </div>
+    </form>
+    </section>
+
+    <script>
+
+        // CART LOGIC
+        if(localStorage.getItem('cart')== null){
+          var cart = {};
+        
+        }else{
+          cart = JSON.parse(localStorage.getItem('cart'));
+                var sum=0;
+                for (var item in cart){
+                  sum = sum + cart[item][0];
+               
+                }
+                 document.getElementById('total').innerHTML=sum+ ' Items';
+        }
+        console.log(cart)
+        // CART SHOW LOGiC
+        let id = Object.keys(cart)
+        console.log('id'+id)
+        var i=0;
+        
+        if ($.isEmptyObject(cart)){
+          mystr = ` <div style="display: flex; flex-direction: column; justify-content:center; align-items:center; width:100%"> 
+         <h1> YOUR CART IS EMPTY </h1>
+            <h1> ADD ITEMS TO YOUR CART  <i class="ri-shopping-cart-fill" style="font-size: 18px;"></i> </h1>
+        
+         
+          <a href="/#products">
+
+          <div class="checkout_right_btn_div" style="margin:10px;">
+            <button type="submit" class="checkout_right_btn">PRODUCTS</button>
+        </div></a>`
+            
+          $('.checkout_product_list').append(mystr);
+        }
+        
+        else{
+        for(item in cart){
+         // console.log(item)
+          let qty = cart[item][0];
+          let name = cart[item][1]; 
+          let img = cart[item][2];
+          let price = cart[item][3];
+        
+          let key = id[i];
+          console.log(key)
+          i=i+1;
+       
+          mystr = `  
+          <div class="checkout_product" id='${key}'>
+            ${img}
+            <div class="checkout_product_name_price">
+                <h2 class="checkout_product_name">${name}</h2>
+                <h3 class="checkout_product_price">${price}</h3>
+            </div>
+            <span class="delete_icon_circle"><i class="ri-close-circle-fill delete_icon icons" id="${key}"></i></span>
+        </div>`
+          
+        $('.checkout_product_list').append(mystr);
+        
+        
+        }
+          
+        }
+        // ADDING CART TO DATABASE
+        $('#item_json').val(JSON.stringify(cart));
+        {% if thank%}
+        localStorage.clear()
+        document.location = "/checkout/"
+        {%endif %}
+        
+        // DELETING ITEM FROM CART
+        
+        $('.icons').click(function(){
+          var idstr = this.id.toString();
+          console.log(idstr)
+          if(cart[idstr] !=undefined)
+          {
+            delete cart[idstr];
+        
+        
+          }
+          console.log(cart);
+          var cart_item = document.getElementById(idstr)
+          cart_item.style.display="none"
+          var sum=0;
+                for (var item in cart){
+                  sum = sum + cart[item][0];
+               
+                }
+                 document.getElementById('total').innerHTML=sum;
+          
+          localStorage.setItem('cart', JSON.stringify(cart));
+        });
+        
+        </script>
+          </body>
+        </html>
+        
+  </body>
+</html>

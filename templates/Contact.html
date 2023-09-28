@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/contact.css' %}" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- cursor.js script will only trigger when it is on a pc -->
+    {% comment %} <script src="{% static 'js/cursor.js' %}"></script>    {% endcomment %}
+    {% comment %} <script src="{% static 'js/animate.js' %}"></script> {% endcomment %}
+    <script src="{% static 'js/toggle.js' %}"></script>
+  </head>
+  <body>
+
+    <!-- <div id="CustomCursor"></div> -->
+
+    <!-- NavBar section -->
+    <nav class="nav_conatiner">
+      <div class="website_nav">
+        <div class="logo_sec">
+          <span><img src="{% static 'img/Logo.png' %}" alt="logo" class="logo_img" /></span>
+          <a href='/'><p class="logo_name">
+            Better <br />
+            Equipments.
+          </p></a>
+        </div>
+        
+        <div class="nav_items">
+          <ul class="nav_items_ul">
+            <a href='/'><li class="nav_item active">Home</li></a>
+            <li class="nav_item">Contact</li>
+            <li class="nav_item">
+              <a href='/checkout/'>
+              <button type="button" class="qute_btn btn" id="get_quote_btn">
+                Get a quote <span id='cart_main'></span>
+              </button></a>
+              <a href='/checkout/'>
+              <button type="button" class="qute_btn btn" id="cart_btn">
+                <i class="ri-shopping-cart-line cart_icon"></i> Cart (<span id='cart_main'>0</span>)
+              </button>
+            </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="mobile_nav">
+        <div class="nav_icons">
+          <a href="/"
+            ><i class="ri-home-fill icon" onclick="website_switch()"></i
+          ></a>
+           <a href='/contact/'><i class="ri-phone-fill icon"></i></a>
+           <a href="/"><img src="{% static '/img/mobile-logo.png' %}" alt="sfs" class="mobile_logo_img" /></a>
+          <a href='#product-section'><i class="ri-shopping-cart-fill icon"></i></a>
+          <a href="/"><i class="ri-menu-3-line icon"></i></a>
+        </div>
+      </div>
+    </nav>
+    <!-- NavBar section End -->
+
+    <main class="main" id="main">
+      
+      <section class="contact_section ">
+        <div class="contact_div">
+            <div class="qr_section">
+                <img src="{% static '/img/QRcode.png' %}" alt="qr" class="qr_img">
+            </div>
+            <h1 class="qr_title">Scan the qr code to contact us</h1>
+            <div class="conatct_details">
+                <div class="conatct_detail"><span class="conatct_icon_cir"><i class="ri-mail-fill conatct_icon"></i></span><h3>gyaneshgaurav95@gmail.com</h3> </div>
+                <div class="conatct_detail"><span class="conatct_icon_cir"><i class="ri-phone-fill"></i></span><h3>+91 9913076285</h3> </div>
+            </div>
+        </div>
+
+    </section>
+      
+    </main>
+
+    <footer class="footer">
+      <div class="footer_items">
+        <img src="{% static '/img/mobile-logo.png' %}" alt="sfs" class="footer_logo_img" />
+        <h3 class="footer_text">Made with <i class="ri-heart-fill"></i></h3>
+        <span class="circle"><i class="ri-arrow-up-line"></i></span>
+      </div>
+    </footer>
+    <script>
+      console.log("working")
+      if (screen && screen.width > 904) {
+        document.write('<script type="text/javascript" src="{% static 'js/cursor.js' %}"><\/script>');
+        document.write('<div id="CustomCursor"></div>')
+      }
+      {% comment %} CART  {% endcomment %}
+      
+      if(localStorage.getItem('cart')== null){
+      var cart={};
+    }
+      else
+      {
+        cart = JSON.parse(localStorage.getItem('cart'));
+        var sum=0;
+        for (var item in cart){
+          sum = sum + cart[item][0];
+       
+        }
+         document.getElementById('cart_main').innerHTML=sum;
+      }
+{% comment %} CART ADD {% endcomment %}
+
+
+
+      $('.cart_add').click(function(){
+        var idstr = this.id.toString();
+        if(cart[idstr] !=undefined)
+        {
+          qty = cart[idstr][0]+1;
+
+        }
+        else
+        {
+          qty = 1;
+          name = document.getElementById('name'+idstr).innerHTML;
+          img = document.getElementById('img'+idstr).innerHTML;
+          price = document.getElementById('price'+idstr).innerHTML;
+          cart[idstr] = [qty,name,img,price];
+          
+        }
+        var sum=0;
+        for (var item in cart){
+          sum = sum + cart[item][0];
+       
+        }
+        console.log(cart);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        document.getElementById('cart_main').innerHTML=sum;
+        let elements = document.querySelectorAll('.cart_add')
+
+      let cleavage = event.target;
+      let btnid= cleavage.id;
+      console.log(btnid)
+      let cart_add = document.getElementById('div'+btnid);
+      let cart_remove = document.getElementById('div2'+btnid);
+      
+      cart_add.style.display="none"
+    
+      cart_remove.style.display="block"
+        
+        
+      
+      });
+{% comment %} CART REMOVE {% endcomment %}
+      $('.cart_remove').click(function(){
+        var idstr = this.id.toString();
+        if(cart[idstr] !=undefined)
+        {
+          delete cart[idstr]
+
+        }
+        var sum=0;
+        for (var item in cart){
+          sum = sum + cart[item][0];
+       
+        }
+        
+        console.log(cart);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        document.getElementById('cart_main').innerHTML=sum;
+
+
+        let elements = document.querySelectorAll('.cart_remove')
+      let cleavage = event.target;
+      let btnid= cleavage.id;
+      console.log(btnid)
+      let cart_add = document.getElementById('div'+btnid);
+    cart_add.style.display="block"
+    
+    let cart_remove = document.getElementById('div2'+btnid);
+    cart_remove.style.display="none"
+    
+      });
+    
+      </script>
+  </body>
+</html>

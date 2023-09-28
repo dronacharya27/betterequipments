@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-_@h2)9)kbu)r*3jj+w_xm^!@-z310q69m5=vs#h5lg+8d4uud2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app','127.0.0.1']
+ALLOWED_HOSTS = ['.vercel.app','127.0.0.1', 'www.betterequipments.com','betterequipments.com',]
 
 
 # Application definition
@@ -37,8 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django_browser_reload',
     'django.contrib.staticfiles',
-    'betterequipment.apps.appconfig'
+    'betterequipment.apps.appconfig',
+    
 ]
 
 MIDDLEWARE = [
@@ -49,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django_browser_reload.middleware.BrowserReloadMiddleware"
 ]
 
 ROOT_URLCONF = 'betterequipment.urls'
