@@ -131,14 +131,14 @@ for(item in cart){
  // console.log(item)
   let qty = cart[item][0];
   let name = cart[item][1]; 
-  let img = cart[item][2];
+  //let img = cart[item][2];
   let price = cart[item][3];
   
   let key = id[i];
   console.log(key)
   i=i+1;
   
-
+ let img = <img src="{% static 'pr1.png' %}" alt="pro-1" class="product_img">
  
 
   mystr = `<tr id="${key}">

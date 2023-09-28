@@ -25,7 +25,7 @@ def index(request):
     return render(request,'index.html',params)
 
 def checkout(request):
-    return render(request,'checkout.html')
+    return render(request,'checkout2.html')
 
 async def order(request):
     if request.method=='POST':
@@ -47,8 +47,9 @@ async def order(request):
         
         bot = telegram.Bot(token=BOT_TOKEN)
         await bot.send_message(chat_id=BOT_CHAT_ID, text='Name:'+name+'\nPhone:'+phone+'\nEmail:'+email+'\nAddress:'+address+'\nOrders:'+str1)
-        return render(request,'checkout.html',{'thank':thank})
+        return render(request,'checkout2.html',{'thank':thank})
 
 
     
-        
+def contact(request):
+    return render(request,'contact.html')
