@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django_browser_reload',
     'django.contrib.staticfiles',
     'betterequipment.apps.appconfig',
     
@@ -51,7 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "django_browser_reload.middleware.BrowserReloadMiddleware"
+    
 ]
 
 ROOT_URLCONF = 'betterequipment.urls'
@@ -82,11 +81,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'betterequipment',
-        'USER':'admin',
-        'PASSWORD':'admin'
+        'USER':'postgres',
+        'PASSWORD':'postgres'
     }
 }
-DATABASES['default']= dj_database_url.parse("postgres://betterequipments_user:Gh1WPakLwuRSxfjPU9koH1iabDfjVvpt@dpg-cj9buepduelc7395vl2g-a.oregon-postgres.render.com/betterequipments")
+DATABASES['default']= dj_database_url.parse("postgres://default:4PHyXY6NvhTz@ep-lucky-shadow-44836864.ap-southeast-1.postgres.vercel-storage.com:5432/verceldb")
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
